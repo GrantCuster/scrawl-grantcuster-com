@@ -2,13 +2,14 @@ import type { PageProps } from "waku/router";
 import { sql } from "../../shared/db";
 import { PostType } from "../../shared/types";
 import { Header } from "../../shared/header";
-import {
-  dateToReadableString,
-} from "../../shared/dateFormatter";
+import { dateToReadableString } from "../../shared/dateFormatter";
 import Markdown from "react-markdown";
 import {
   AdminWrapper,
   PostDeleter,
+  ShareToBluesky,
+  ShareToMastodon,
+  ShareToTwitter,
 } from "../../shared/AdminComponents";
 import { getWordCount, printWordCount } from "../../shared/utils";
 
@@ -34,7 +35,7 @@ async function Post({ slug }: PageProps<"/post/[slug]">) {
   const readableDate = dateToReadableString(post.created_at);
 
   const title = "scrawl on " + readableDate;
-  const description = post.text.split("\n")[0];
+  const description = post.text.split("\n")[0]!;
   const wordCount = printWordCount(post.text);
 
   return (
@@ -68,11 +69,31 @@ async function Post({ slug }: PageProps<"/post/[slug]">) {
           </div>
         </div>
         <div className="py-3 px-6 border-2 border-gray-300">
-          <div className="mb-4 -mt-2">
-            {wordCount}
-          </div>
+          <div className="mb-4 -mt-2">{wordCount}</div>
           <Markdown>{post.text}</Markdown>
         </div>
+        <AdminWrapper>
+          <div className="flex px-6 pt-1 flex-wrap gap-3 items-start">
+            <div>
+              <a
+                className="underline"
+                href={post.previewimageurl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                image
+              </a>
+            </div>
+            <ShareToBluesky
+              post={post}
+              title={title}
+              description={description}
+              imageUrl={post.previewimageurl}
+            />
+            <ShareToMastodon post={post} />
+            <ShareToTwitter post={post} />
+          </div>
+        </AdminWrapper>
       </div>
     </>
   );

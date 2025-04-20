@@ -76,7 +76,7 @@ export function ShareToMastodon({ post }: { post: PostType }) {
 
   return postStatus === "unshared" ? (
     <button
-      className="pointer-events-auto purple hover:underline"
+      className="pointer-events-auto underline purple"
       onClick={async () => {
         if (!adminPassword) {
           alert("No password");
@@ -86,7 +86,7 @@ export function ShareToMastodon({ post }: { post: PostType }) {
         const status =
           makeSocialShare(post) +
           "\n" +
-          "https://feed.grantcuster.com/post/" +
+          "https://scrawl.grantcuster.com/post/" +
           post.slug;
         setPostStatus("shared");
         const fetchUrl = `${getGardenExtraBaseUrl()}api/postToMastodon`;
@@ -102,12 +102,12 @@ export function ShareToMastodon({ post }: { post: PostType }) {
         });
       }}
     >
-      Share to Mastodon
+      mastodon
     </button>
   ) : postStatus === "sharing" ? (
-    <span>Sharing...</span>
+    <span>sharing...</span>
   ) : (
-    <span>Shared!</span>
+    <span>shared!</span>
   );
 }
 
@@ -129,7 +129,7 @@ export function ShareToBluesky({
 
   return postStatus === "unshared" ? (
     <button
-      className="pointer-events-auto purple hover:underline"
+      className="pointer-events-auto underline purple"
       onClick={async () => {
         if (!adminPassword) {
           alert("No password");
@@ -139,7 +139,7 @@ export function ShareToBluesky({
         setPostStatus("sharing");
         const status = makeSocialShare(post);
 
-        const url = `https://feed.grantcuster.com/post/${post.slug}`;
+        const url = `https://scrawl.grantcuster.com/post/${post.slug}`;
 
         const fetchUrl = `${getGardenExtraBaseUrl()}api/postToBluesky`;
         await fetch(fetchUrl, {
@@ -160,12 +160,12 @@ export function ShareToBluesky({
         setPostStatus("shared");
       }}
     >
-      Share to Bluesky
+      bluesky
     </button>
   ) : postStatus === "sharing" ? (
-    <span>Sharing...</span>
+    <span>sharing...</span>
   ) : (
-    <span>Shared!</span>
+    <span>shared!</span>
   );
 }
 
@@ -182,11 +182,11 @@ export function ShareToTwitter({ post }: { post: PostType }) {
 
   return (
     <a
-      className="pointer-events-auto purple hover:underline"
+      className="pointer-events-auto purple underline"
       href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(truncated)}&url=https://feed.grantcuster.com/post/${post.slug}`}
       target="_blank"
     >
-      Tweet
+      tweet
     </a>
   );
 }
