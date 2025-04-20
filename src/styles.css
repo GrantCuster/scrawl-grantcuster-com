@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+html,
+body {
+  background: theme("colors.neutral.900");
+  color: theme("colors.neutral.200");
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+p + p {
+  margin-top: 1.25rem;
+}
+
+img + em {
+}
