@@ -183,7 +183,7 @@ export function ShareToTwitter({ post }: { post: PostType }) {
   return (
     <a
       className="pointer-events-auto purple underline"
-      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(truncated)}&url=https://feed.grantcuster.com/post/${post.slug}`}
+      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(truncated)}&url=https://scrawl.grantcuster.com/post/${post.slug}`}
       target="_blank"
     >
       tweet
