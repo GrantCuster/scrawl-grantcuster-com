@@ -293,7 +293,6 @@ export function makeCanvasPreview(post: PostType) {
       canvas.width - startX * 2,
       80,
     );
-    console.log("lineNumber", lineNumber);
     startY += lineNumber * 80 + 80;
   }
 
@@ -352,7 +351,6 @@ export function RegenCanvas({
         ...post,
         previewimageurl: uploadedImageUrl,
       };
-      console.log("Final post", finalPost);
       await updatePost(finalPost, adminPassword);
       // reload page
       window.location.href = `/post/${post.slug}`;

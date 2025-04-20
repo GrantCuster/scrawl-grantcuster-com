@@ -13,7 +13,6 @@ import {
 import { getWordCount, printWordCount } from "../../shared/utils";
 
 async function Post({ slug }: PageProps<"/post/[slug]">) {
-  console.log(slug);
   const postData: PostType[] = await sql`
     SELECT p.id, p.text, p.created_at, p.slug, p.previewimageurl
     FROM posts p
