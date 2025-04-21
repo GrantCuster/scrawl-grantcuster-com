@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import { PostType } from "./types";
 import { adminPasswordAtom } from "./atoms";
 import { makeSocialShare } from "./utils";
-import {useState } from "react";
+import { useState } from "react";
 import { getGardenExtraBaseUrl } from "./consts";
 import { dateToReadableString } from "./dateFormatter";
 
@@ -103,6 +103,52 @@ export function ShareToMastodon({ post }: { post: PostType }) {
       }}
     >
       mastodon
+    </button>
+  ) : postStatus === "sharing" ? (
+    <span>sharing...</span>
+  ) : (
+    <span>shared!</span>
+  );
+}
+
+export function ShareToFeed({ post }: { post: PostType }) {
+  const [adminPassword] = useAtom(adminPasswordAtom);
+  const [postStatus, setPostStatus] = useState<
+    "unshared" | "sharing" | "shared"
+  >("unshared");
+
+  return postStatus === "unshared" ? (
+    <button
+      className="pointer-events-auto underline purple"
+      onClick={async () => {
+        if (!adminPassword) {
+          alert("No password");
+          return;
+        }
+
+        setPostStatus("sharing");
+
+        const fetchUrl = `${getGardenExtraBaseUrl()}api/postToFeed`;
+        await fetch(fetchUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${adminPassword}`,
+          },
+          body: JSON.stringify({
+            tags: ["scrawl"],
+            content:
+              `![](${post.previewimageurl})\n\n` +
+              post.text.split("\n")[0]!.trim() +
+              " " +
+              `[read on scrawl](https://scrawl.grantcuster.com/post/${post.slug})`,
+          }),
+        });
+
+        setPostStatus("shared");
+      }}
+    >
+      feed
     </button>
   ) : postStatus === "sharing" ? (
     <span>sharing...</span>
@@ -230,9 +276,9 @@ export function makeCanvasPreview(post: PostType) {
   }
 
   const canvas = document.createElement("canvas");
-  
+
   // strip markdown links from text
-  let strippedText = post.text
+  let strippedText = post.text;
   strippedText = strippedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
 
   const wordCount = post.text

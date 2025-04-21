@@ -10,8 +10,7 @@ export function makeSlug(text: string) {
 }
 
 export function makeSocialShare(post: PostType) {
-  let status = "✏️ scrawl:";
-  status += "\n"
+  let status = "✏️ ";
   status += post.text.split("\n")[0];
   let truncated = status.slice(0, 300);
   return truncated;

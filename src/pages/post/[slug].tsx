@@ -8,6 +8,7 @@ import {
   AdminWrapper,
   PostDeleter,
   ShareToBluesky,
+  ShareToFeed,
   ShareToMastodon,
   ShareToTwitter,
 } from "../../shared/AdminComponents";
@@ -84,6 +85,7 @@ async function Post({ slug }: PageProps<"/post/[slug]">) {
                 image
               </a>
             </div>
+            <ShareToFeed post={post} />
             <ShareToBluesky
               post={post}
               title={title}
