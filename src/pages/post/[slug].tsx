@@ -69,7 +69,7 @@ async function Post({ slug }: PageProps<"/post/[slug]">) {
             </AdminWrapper>
           </div>
         </div>
-        <div className="py-3 px-6 border-2 border-gray-300">
+        <div className="py-3 px-6 border-2 border-gruvbox-white">
           <div className="mb-4 -mt-2">{wordCount}</div>
           <Markdown>{post.text}</Markdown>
         </div>

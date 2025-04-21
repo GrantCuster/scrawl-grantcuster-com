@@ -294,11 +294,11 @@ export function makeCanvasPreview(post: PostType) {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
-  ctx.fillStyle = "#171717";
+  ctx.fillStyle = "#1d2021";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.font = "68px sans-serif";
-  ctx.fillStyle = "#e5e5e5";
+  ctx.fillStyle = "#ebdbb2";
 
   const startX = 180;
   let startY = 180;
@@ -309,7 +309,7 @@ export function makeCanvasPreview(post: PostType) {
 
   startY += 80;
 
-  ctx.strokeStyle = "#e5e5e5";
+  ctx.strokeStyle = "#ebdbb2";
   ctx.lineWidth = 6;
   const pad = 80;
   ctx.strokeRect(

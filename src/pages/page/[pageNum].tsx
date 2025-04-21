@@ -50,7 +50,7 @@ export default async function PostPage({
                     {dateToReadableString(post.created_at)}
                   </a>
                 </div>
-                <div className="py-3 px-6 border-2 border-gray-300">
+                <div className="py-3 px-6 border-2 border-grubox-white">
                   <div className="mb-4 -mt-2">
                     {printWordCount(post.text)}
                   </div>

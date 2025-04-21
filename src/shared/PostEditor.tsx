@@ -56,7 +56,7 @@ export function PostEditor({
       <div className="px-6 pb-1 lowercase">
         {dateToReadableString(createdAt)}
       </div>
-      <div className="py-3 px-6 border-2 border-gray-300">
+      <div className="py-3 px-6 border-2 border-grubox-white">
         <div className="mb-4 -mt-2">
           {wordCount} word{wordCount !== 1 ? "s" : ""}
         </div>
